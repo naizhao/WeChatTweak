@@ -14,7 +14,7 @@ A command-line tool for tweaking WeChat.
 
 ## 说明
 
-- 由于设备限制，本项目当前仅支持 x64 架构的微信最新版。
+- 由于设备限制，本项目当前仅支持 x64 架构的微信最新版。（下载地址：https://dldir1v6.qq.com/weixin/Universal/Mac/xWeChatMac_universal_4.1.7.55_34817.dmg?t=1770782406）
 
 ## 安装&使用
 
@@ -31,8 +31,8 @@ wechattweak patch
 # 执行 Patch（官方配置，应用名改为 wx.app）
 wechattweak patch -a /Applications/wx.app
 
-# 执行 Patch（使用 tanranv5 仓库的 config.json，应用名改为 wx.app）
-wechattweak patch -a /Applications/wx.app -c https://raw.githubusercontent.com/tanranv5/WeChatTweak/refs/heads/master/config.json
+# 执行 Patch（使用 tanranv5 仓库的 config.json）
+wechattweak patch -c https://raw.githubusercontent.com/tanranv5/WeChatTweak/refs/heads/master/config.json
 
 #多开
 open -n /Applications/wx.app
