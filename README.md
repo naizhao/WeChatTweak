@@ -12,6 +12,10 @@ A command-line tool for tweaking WeChat.
 - 阻止自动更新
 - 客户端多开
 
+## 说明
+
+- 由于设备限制，本项目当前仅支持 x64 架构的微信最新版。
+
 ## 安装&使用
 
 ```bash
@@ -21,8 +25,17 @@ brew install sunnyyoung/tap/wechattweak
 # 更新
 brew upgrade wechattweak
 
-# 执行 Patch
+# 执行 Patch（官方配置，默认应用名 WeChat.app）
 wechattweak patch
+
+# 执行 Patch（官方配置，应用名改为 wx.app）
+wechattweak patch -a /Applications/wx.app
+
+# 执行 Patch（使用 tanranv5 仓库的 config.json，应用名改为 wx.app）
+wechattweak patch -a /Applications/wx.app -c https://raw.githubusercontent.com/tanranv5/WeChatTweak/refs/heads/master/config.json
+
+#多开
+open -n /Applications/wx.app
 
 # 查看所有支持的 WeChat 版本
 wechattweak versions
