@@ -113,7 +113,7 @@ struct Tweak: AsyncParsableCommand {
                 }
             }
         )
-        var config: URL = URL(string:"https://raw.githubusercontent.com/sunnyyoung/WeChatTweak/refs/heads/master/config.json")!
+        var config: URL = URL(string:"https://raw.githubusercontent.com/tanranv5/WeChatTweak/master/config.json")!
     }
 
     static let configuration = CommandConfiguration(

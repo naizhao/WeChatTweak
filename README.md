@@ -40,13 +40,13 @@ brew install tanranv5/tap/wechattweak
 # 更新
 brew upgrade tanranv5/tap/wechattweak
 
-# 执行 Patch（官方配置，默认应用名 WeChat.app）
+# 执行 Patch（默认使用 tanranv5/WeChatTweak 的 config.json）
 wechattweak patch
 
-# 执行 Patch（官方配置，应用名改为 wx.app）
+# 执行 Patch（默认配置，应用名改为 wx.app）
 wechattweak patch -a /Applications/wx.app
 
-# 执行 Patch（使用 tanranv5 仓库的 config.json）
+# 显式指定 tanranv5 仓库的 config.json
 wechattweak patch -c https://raw.githubusercontent.com/tanranv5/WeChatTweak/refs/heads/master/config.json
 
 #多开
