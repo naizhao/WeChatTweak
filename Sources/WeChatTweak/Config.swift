@@ -65,16 +65,19 @@ struct Config: Decodable {
     struct Target: Decodable {
         let identifier: String
         let entries: [Entry]
+        let binary: String?
 
         private enum CodingKeys: CodingKey {
             case identifier
             case entries
+            case binary
         }
 
         init(from decoder: any Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             self.identifier = try container.decode(String.self, forKey: .identifier)
             self.entries = try container.decode([Entry].self, forKey: .entries)
+            self.binary = try container.decodeIfPresent(String.self, forKey: .binary)
         }
     }
 

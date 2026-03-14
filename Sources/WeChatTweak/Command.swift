@@ -24,7 +24,15 @@ struct Command {
     }
 
     static func patch(app: URL, config: Config) async throws {
-        try Patcher.patch(binary: app.appendingPathComponent("Contents/MacOS/WeChat"), config: config)
+        let defaultBinary = "Contents/MacOS/WeChat"
+        let grouped = Dictionary(grouping: config.targets) { target in
+            target.binary ?? defaultBinary
+        }
+
+        for (binary, targets) in grouped {
+            let subConfig = Config(version: config.version, targets: targets)
+            try Patcher.patch(binary: app.appendingPathComponent(binary), config: subConfig)
+        }
     }
 
     static func resign(app: URL) async throws {

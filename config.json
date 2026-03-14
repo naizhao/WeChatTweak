@@ -328,5 +328,32 @@
         ]
       }
     ]
+  },
+  {
+    "version": "36559",
+    "targets": [
+      {
+        "identifier": "revoke",
+        "entries": [
+          {
+            "arch": "x86_64",
+            "addr": "4B51260",
+            "asm": "B801000000C3"
+          }
+        ],
+        "binary": "Contents/Frameworks/wechat.dylib"
+      },
+      {
+        "identifier": "multiInstance",
+        "entries": [
+          {
+            "arch": "x86_64",
+            "addr": "21f008",
+            "asm": "909090909090"
+          }
+        ],
+        "binary": "Contents/Frameworks/wechat.dylib"
+      }
+    ]
   }
 ]
