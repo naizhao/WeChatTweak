@@ -1,6 +1,6 @@
 # WeChatTweak
 
-[![README](https://img.shields.io/badge/GitHub-black?logo=github&logoColor=white)](https://github.com/sunnyyoung/WeChatTweak)
+[![README](https://img.shields.io/badge/GitHub-black?logo=github&logoColor=white)](https://github.com/tanranv5/WeChatTweak)
 [![README](https://img.shields.io/badge/Telegram-black?logo=telegram&logoColor=white)](https://t.me/wechattweak)
 [![README](https://img.shields.io/badge/FAQ-black?logo=googledocs&logoColor=white)](https://github.com/sunnyyoung/WeChatTweak/wiki/FAQ)
 
@@ -14,9 +14,24 @@ A command-line tool for tweaking WeChat.
 
 ## 说明
 
-- 由于设备限制，本项目当前仅支持 x64 架构的微信最新版。（下载地址：https://dldir1v6.qq.com/weixin/Universal/Mac/xWeChatMac_universal_4.1.7.55_34817.dmg?t=1770782406）
+- 当前仓库暂时只维护 x64 版本。
+- 本项目仅限学习与技术交流使用，禁止用于任何违法用途。
+- 当前已验证版本为 `wx.app 4.1.8.27 (36559)`：
+  `https://dldir1v6.qq.com/weixin/Universal/Mac/xWeChatMac_universal_4.1.8.27_36559.dmg?t=1770782406`
 
 ## 安装&使用
+
+### 迁移说明
+
+- 需要改用 `tanranv5/WeChatTweak` 和 `tanranv5/tap/wechattweak`，因为旧版 Homebrew 打包产物只会 patch `Contents/MacOS/WeChat`，不支持当前版本所需的 `Contents/Frameworks/wechat.dylib`。
+- 如果机器上已经装过原版，请先卸载原版打包，再安装这里维护的版本。
+
+```bash
+# 原版可能来自多个 tap，先卸掉旧包
+brew uninstall sunnyyoung/tap/wechattweak || brew uninstall wechattweak
+```
+
+### Brew 安装
 
 ```bash
 # 安装
@@ -39,6 +54,19 @@ open -n /Applications/wx.app
 
 # 查看所有支持的 WeChat 版本
 wechattweak versions
+```
+
+### 不切换 brew 时的手工打包方式
+
+如果你不想切到 `tanranv5/tap/wechattweak`，就不要继续使用旧版 brew 产物，而是手工打包当前仓库：
+
+```bash
+git clone https://github.com/tanranv5/WeChatTweak.git
+cd WeChatTweak
+make build
+
+# 使用本地构建产物
+./wechattweak patch -a /Applications/wx.app -c ./config.json
 ```
 
 ## 最新适配
