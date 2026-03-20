@@ -16,9 +16,6 @@ A command-line tool for tweaking WeChat.
 
 - 当前仓库暂时只维护 x64 版本。
 - 本项目仅限学习与技术交流使用，禁止用于任何违法用途。
-- 当前已验证版本为 `wx.app 4.1.8.27 (36559)`：
-  `https://dldir1v6.qq.com/weixin/Universal/Mac/xWeChatMac_universal_4.1.8.27_36559.dmg?t=1770782406`
-
 ## 安装&使用
 
 ### 迁移说明
