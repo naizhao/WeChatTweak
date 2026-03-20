@@ -43,14 +43,12 @@ brew upgrade tanranv5/tap/wechattweak
 # 执行 Patch（默认使用 tanranv5/WeChatTweak 的 config.json）
 wechattweak patch
 
-# 执行 Patch（默认配置，应用名改为 wx.app）
-wechattweak patch -a /Applications/wx.app
 
 # 显式指定 tanranv5 仓库的 config.json
 wechattweak patch -c https://raw.githubusercontent.com/tanranv5/WeChatTweak/refs/heads/master/config.json
 
 #多开
-open -n /Applications/wx.app
+open -n /Applications/WeChat.app
 
 # 查看所有支持的 WeChat 版本
 wechattweak versions
@@ -71,11 +69,8 @@ make build
 
 ## 最新适配
 
-- `wx.app 4.1.8.27 (36559)` 下载地址：
-  `https://dldir1v6.qq.com/weixin/Universal/Mac/xWeChatMac_universal_4.1.8.27_36559.dmg?t=1770782406`
-- 本次变更仅做了两类最小补充：
-  - `config.json` 新增 `36559` 的 x86_64 防撤回和多开配置
-  - patch 流程新增 `target.binary` 支持，可直接对 `Contents/Frameworks/wechat.dylib` 打补丁；旧版构建产物只会 patch `Contents/MacOS/WeChat`，不适用于这一版
+- `wx.app 4.1.8.29 (36603)` 下载地址：
+  `https://dldir1v6.qq.com/weixin/Universal/Mac/xWeChatMac_universal_4.1.8.29_36603.dmg?t=1770782406`
 
 ## 参考
 
