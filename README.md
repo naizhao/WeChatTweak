@@ -61,7 +61,7 @@ cd WeChatTweak
 make build
 
 # 使用本地构建产物
-./wechattweak patch -a /Applications/wx.app -c ./config.json
+./wechattweak patch  -c ./config.json
 ```
 
 ## 最新适配
