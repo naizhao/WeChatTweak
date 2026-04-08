@@ -66,8 +66,8 @@ make build
 
 ## 最新适配
 
-- `wx.app 4.1.8.101 (37293)` 下载地址：
-  `https://dldir1v6.qq.com/weixin/Universal/Mac/xWeChatMac_universal_4.1.8.101_37293.dmg`
+- `wx.app 4.1.8.104 (37303)` 下载地址：
+  `https://dldir1v6.qq.com/weixin/Universal/Mac/xWeChatMac_universal_4.1.8.104_37303.dmg`
 
 ## 参考
 
