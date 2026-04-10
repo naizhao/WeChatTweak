@@ -102,6 +102,10 @@ vmmap "$PID" | grep 'wx.app/Contents/Frameworks/wechat.dylib'
 - `revoke`: `wechat.dylib@0x4C2CA90 -> B801000000C3`
 - `multiInstance`: `wechat.dylib@0x21EC38 -> 909090909090`
 
+### `4.1.8 / 37331 / x86_64`
+- `revoke`: `wechat.dylib@0x4C31660 -> B801000000C3`
+- `multiInstance`: `wechat.dylib@0x21EC38 -> 909090909090`
+
 对应配置见：
 - [`config.json`](/Users/tanran/aiCode/patchWx/WeChatTweak/config.json)
 
@@ -132,6 +136,7 @@ vmmap "$PID" | grep 'wx.app/Contents/Frameworks/wechat.dylib'
 - `36677`：caller `0x4B87074`，parser `0x4B870F0`
 - `37293`：caller `0x4C2B294`，parser `0x4C2B310`
 - `37303`：caller `0x4C2CA14`，parser `0x4C2CA90`
+- `37331`：caller `0x4C315E4`，parser `0x4C31660`
 
 优先直接搜索磁盘里的：
 ```text
@@ -545,6 +550,90 @@ patch VA=0x21ec38, fileoff=0x222c38
 - caller / multi block 这两条字节特征已经足够支撑首轮快速适配
 - 这条线以后默认先 raw binary search，再最小回到 IDA 确认
 
+### 5.6 `37331` 快速适配结果
+这版可以完全靠 raw binary search 快速收敛，不需要先等 IDA 分析完成。
+
+这次先确认了：
+- `/Users/tanran/Downloads/wx/wechat.dylib`
+- `/Applications/wx.app/Contents/Frameworks/wechat.dylib`
+
+两者 hash 一致，因此可以直接把下载目录里的样本当作 live 二进制来适配。
+
+另外这版在二进制里可以直接搜到：
+```text
+4.1.8.105
+```
+
+正式 App 的版本号是：
+- `CFBundleVersion = 37331`
+- `CFBundleShortVersionString = 4.1.8`
+
+#### 多开线
+多开块特征继续命中：
+```text
+41 BE FF FF FF FF 84 DB 0F 84 ?? ?? ?? ?? E8 ?? ?? ?? ?? 48 89 C7
+```
+
+命中块仍然是：
+```text
+0x21EC30  mov  r14d, -1
+0x21EC36  test bl, bl
+0x21EC38  jz   loc_21F751
+```
+
+所以这版多开继续沿用：
+```text
+wechat.dylib@0x21EC38 -> 909090909090
+```
+
+这轮 live 验证结果：
+- 首开后主进程数为 `1`
+- `open -n /Applications/wx.app` 后主进程数稳定为 `2`
+- 两个主进程持续存活
+
+#### 撤回线
+这次直接先搜 caller 特征：
+```text
+E8 ?? ?? ?? ?? 84 C0 74 ?? B0 01 80 7D C0 01
+```
+
+命中的 caller / parser 是：
+- caller：`0x4C315E4`
+- parser：`0x4C31660`
+
+caller 关键控制流：
+```text
+call 0x4C31660
+test al, al
+jz   loc_4C315F5
+mov  al, 1
+cmp  byte ptr [rbp-0x40], 1
+```
+
+parser 附近继续能看到 `revokemsg` 初始化，因此这版仍按“parser 直接返回 1”收敛：
+```text
+wechat.dylib@0x4C31660 -> B801000000C3
+```
+
+这次 `patch` 的真实输出是：
+```text
+patch VA=0x4c31660, fileoff=0x4c35660
+patch VA=0x21ec38, fileoff=0x222c38
+```
+
+注意：
+- `config.json` 要写 `VA=0x4C31660` 和 `VA=0x21EC38`
+- 不能把 `fileoff=0x4C35660` / `0x222C38` 抄回配置
+
+当前验证状态：
+- `multiInstance`：已 live 验证通过
+- `revoke`：已由用户真实撤回测试确认可用
+
+这次 `37331` 的关键经验：
+- 对已知同型链做快速适配时，先比 hash，再直接搜样本二进制，比先等 IDA 更快
+- 多开线到这版仍然没有再漂，`0x21EC38` 可以继续作为当前短期基线
+- 撤回线继续按 caller 特征先命中，再由 `call rel32` 算 parser，最后用 `revokemsg` 初始化做二次确认
+
 ## 6. 当前已验证配置
 `36559` 的当前写法：
 ```json
@@ -647,6 +736,29 @@ patch VA=0x21ec38, fileoff=0x222c38
       "identifier": "revoke",
       "entries": [
         { "arch": "x86_64", "addr": "4C2CA90", "asm": "B801000000C3" }
+      ],
+      "binary": "Contents/Frameworks/wechat.dylib"
+    },
+    {
+      "identifier": "multiInstance",
+      "entries": [
+        { "arch": "x86_64", "addr": "21EC38", "asm": "909090909090" }
+      ],
+      "binary": "Contents/Frameworks/wechat.dylib"
+    }
+  ]
+}
+```
+
+`37331` 的当前快速适配写法：
+```json
+{
+  "version": "37331",
+  "targets": [
+    {
+      "identifier": "revoke",
+      "entries": [
+        { "arch": "x86_64", "addr": "4C31660", "asm": "B801000000C3" }
       ],
       "binary": "Contents/Frameworks/wechat.dylib"
     },
