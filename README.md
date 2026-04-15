@@ -9,7 +9,6 @@ A command-line tool for tweaking WeChat.
 ## 功能
 
 - 阻止消息撤回
-- 阻止自动更新
 - 客户端多开
 
 ## 说明
