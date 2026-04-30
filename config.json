@@ -544,5 +544,32 @@
         "binary": "Contents/Frameworks/wechat.dylib"
       }
     ]
+  },
+  {
+    "version": "268575",
+    "targets": [
+      {
+        "identifier": "revoke",
+        "entries": [
+          {
+            "arch": "x86_64",
+            "addr": "4C3FA10",
+            "asm": "B801000000C3"
+          }
+        ],
+        "binary": "Contents/Resources/wechat.dylib"
+      },
+      {
+        "identifier": "multiInstance",
+        "entries": [
+          {
+            "arch": "x86_64",
+            "addr": "214908",
+            "asm": "909090909090"
+          }
+        ],
+        "binary": "Contents/Resources/wechat.dylib"
+      }
+    ]
   }
 ]
