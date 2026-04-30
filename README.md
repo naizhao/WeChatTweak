@@ -19,7 +19,7 @@ A command-line tool for tweaking WeChat.
 
 ### 迁移说明
 
-- 需要改用 `tanranv5/WeChatTweak` 和 `tanranv5/tap/wechattweak`，因为旧版 Homebrew 打包产物只会 patch `Contents/MacOS/WeChat`，不支持当前版本所需的 `Contents/Frameworks/wechat.dylib`。
+- 需要改用 `tanranv5/WeChatTweak` 和 `tanranv5/tap/wechattweak`，因为旧版 Homebrew 打包产物只会 patch `Contents/MacOS/WeChat`，不支持通过 `config.json` 的 `binary` 字段按版本指定不同二进制路径（如 `Contents/Frameworks/wechat.dylib` 或 `Contents/Resources/wechat.dylib`）。
 - 如果机器上已经装过原版，请先卸载原版打包，再安装这里维护的版本。
 
 ```bash
