@@ -8,12 +8,13 @@ A command-line tool for tweaking WeChat.
 
 ## 功能
 
-- 阻止消息撤回
-- 客户端多开
+- 阻止消息撤回（arm64 / x86_64）
+- 客户端多开（x86_64）
 
 ## 说明
 
-- 当前仓库暂时只维护 x64 版本。
+- 同时支持 Apple Silicon（arm64）原生与 Intel / Rosetta（x86_64）。
+- 「客户端多开」目前只对 x86_64 切片有 patch；Apple Silicon 用户如需多开，可临时让微信走 Rosetta 跑 x86_64（参考 [`MAINTAINING.md`](./MAINTAINING.md) 末尾的「临时回退方案」）。
 - 本项目仅限学习与技术交流使用，禁止用于任何违法用途。
 ## 安装&使用
 
@@ -65,10 +66,14 @@ make build
 
 ## 最新适配
 
-- `wx.app 4.1.9.31 (268575)` 下载地址：
+- `wx.app 4.1.9.31 (268575)`（arm64 + x86_64）下载地址：
   `https://dldir1v6.qq.com/weixin/Universal/Mac/xWeChatMac_universal_4.1.9.31_268575.dmg`
-- `wx.app 4.1.8.107 (37342)` 下载地址：
+- `wx.app 4.1.8.107 (37342)`（x86_64）下载地址：
   `https://dldir1v6.qq.com/weixin/Universal/Mac/xWeChatMac_universal_4.1.8.107_37342.dmg`
+
+## 维护
+
+跟版新 build、定位函数地址、构造 patch 字节的完整工作流见 [`MAINTAINING.md`](./MAINTAINING.md)。
 
 ## 参考
 
