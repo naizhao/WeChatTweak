@@ -552,6 +552,11 @@
         "identifier": "revoke",
         "entries": [
           {
+            "arch": "arm64",
+            "addr": "45D0374",
+            "asm": "20008052C0035FD6"
+          },
+          {
             "arch": "x86_64",
             "addr": "4C3FA10",
             "asm": "B801000000C3"
